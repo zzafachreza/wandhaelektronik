@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1003214178487",
+    "project_id": "wandha-elektronik",
+    "storage_bucket": "wandha-elektronik.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003214178487:android:6df439648e16370da82532",
+        "android_client_info": {
+          "package_name": "com.wandhaelektronik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003214178487-8uomcuqst80fnsak1e4r6n75dp4t6dif.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcqp59cBVbDNRq6jky9OQYxjhLWU7FcDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003214178487-8uomcuqst80fnsak1e4r6n75dp4t6dif.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
