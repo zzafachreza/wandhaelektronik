@@ -21,19 +21,6 @@ import MyTerbaik from '../../components/MyTerbaik';
 import axios from 'axios';
 
 export default function Home({navigation}) {
-  const images = [
-    {
-      image:
-        'https://images.bisnis-cdn.com/posts/2019/09/27/1153079/rruk-dynamix2.jpg',
-    },
-    {
-      image: 'https://kipmi.or.id/wp-content/uploads/2017/01/molen-kecil.jpg',
-    },
-    {
-      image: 'https://kipmi.or.id/wp-content/uploads/2016/11/beton8.jpg',
-    },
-  ];
-
   const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
 
@@ -47,7 +34,7 @@ export default function Home({navigation}) {
       });
     });
     axios
-      .post('https://zavalabs.com/pembantuku/api/update_token.php', {
+      .post('https://zavalabs.com/wandhaelektronik/api/update_token.php', {
         id_member: user.id,
         token: token,
       })
@@ -79,15 +66,17 @@ export default function Home({navigation}) {
       <ScrollView>
         <View
           style={{
-            height: 100,
+            height: windowHeight / 9,
             padding: 10,
             backgroundColor: colors.primary,
             flexDirection: 'row',
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
           }}>
           <View style={{flex: 1, paddingTop: 15}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: windowWidth / 25,
                 color: colors.white,
                 fontFamily: fonts.secondary[400],
               }}>
@@ -95,7 +84,7 @@ export default function Home({navigation}) {
             </Text>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: windowWidth / 22,
                 color: colors.white,
                 fontFamily: fonts.secondary[600],
               }}>
@@ -113,9 +102,109 @@ export default function Home({navigation}) {
             <Icon type="ionicon" name="cart-outline" color={colors.white} />
           </TouchableOpacity>
         </View>
+
+        {/* bagian untuk point dan redeem */}
+
         <View
           style={{
+            height: windowHeight / 13,
+            flexDirection: 'row',
             padding: 10,
+            backgroundColor: colors.white,
+            justifyContent: 'space-between',
+          }}>
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              marginHorizontal: 5,
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              flexDirection: 'row',
+              // borderWidth: 1,
+              borderRadius: 10,
+              borderColor: colors.primary,
+              backgroundColor: colors.white,
+            }}>
+            <Icon
+              type="ionicon"
+              name="ribbon"
+              color={colors.primary}
+              size={windowWidth / 13}
+            />
+            <View style={{marginLeft: 5}}>
+              <Text
+                style={{
+                  fontSize: windowWidth / 40,
+                  color: colors.primary,
+                  fontFamily: fonts.secondary[400],
+                }}>
+                Point
+              </Text>
+              <Text
+                style={{
+                  fontSize: windowWidth / 35,
+                  color: colors.primary,
+                  fontFamily: fonts.secondary[600],
+                }}>
+                {parseFloat(user.point).toLocaleString('id-ID')}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Hadiah')}
+            style={{
+              flex: 1,
+              marginHorizontal: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+              borderWidth: 1,
+              borderRadius: 10,
+              borderColor: colors.primary,
+              backgroundColor: colors.white,
+              shadowColor: colors.primary,
+              shadowColor: '#000',
+              shadowOffset: {
+                width: -10,
+                height: 2,
+              },
+              shadowOpacity: 0.44,
+              shadowRadius: 5.32,
+              elevation: 2,
+            }}>
+            <Icon
+              type="ionicon"
+              name="gift-outline"
+              color={colors.primary}
+              size={windowWidth / 13}
+            />
+            <View style={{marginLeft: 5}}>
+              <Text
+                style={{
+                  fontSize: windowWidth / 40,
+                  color: colors.primary,
+                  fontFamily: fonts.secondary[400],
+                }}>
+                Daftar
+              </Text>
+              <Text
+                style={{
+                  fontSize: windowWidth / 35,
+                  color: colors.primary,
+                  fontFamily: fonts.secondary[600],
+                }}>
+                Hadiah
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
+            paddingTop: 20,
+            paddingHorizontal: 10,
             backgroundColor: colors.primary,
             paddingBottom: 20,
           }}>

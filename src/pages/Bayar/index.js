@@ -150,7 +150,10 @@ export default function Bayar({navigation, route}) {
     console.log('kirim ke server', data);
     setTimeout(() => {
       axios
-        .post('https://zavalabs.com/mylaundry/api/transaksi_add.php', data)
+        .post(
+          'https://zavalabs.com/wandhaelektronik/api/transaksi_add.php',
+          data,
+        )
         .then(res => {
           console.log(res);
           setLoading(false);
@@ -240,7 +243,7 @@ export default function Bayar({navigation, route}) {
                 fontFamily: fonts.secondary[600],
                 padding: 10,
               }}>
-              MYLAUNDRY
+              wandhaelektronik
             </Text>
           </View>
           <View

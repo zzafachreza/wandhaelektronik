@@ -17,7 +17,7 @@ export default function Laporan({route}) {
     setVisible(false);
   };
 
-  const myUrl = `https://zavalabs.com/mylaundry/api/laporan.php`;
+  const myUrl = `https://zavalabs.com/wandhaelektronik/api/laporan.php`;
 
   return (
     <SafeAreaView

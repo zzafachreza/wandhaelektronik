@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
-  ScrollView,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
@@ -16,10 +15,11 @@ import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
-export default function PemakaianTambah() {
+
+export default function Hadiah() {
   useEffect(() => {
     axios
-      .get('https://zavalabs.com/wandhaelektronik/api/barang_kebutuhan.php')
+      .get('https://zavalabs.com/wandhaelektronik/api/hadiah.php')
       .then(res => {
         console.log(res.data);
         setData(res.data);
@@ -27,85 +27,51 @@ export default function PemakaianTambah() {
       });
   }, []);
 
+  const navigation = useNavigation();
+  const [data, setData] = useState([]);
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
         style={styles.card}
-        onPress={() => navigation.navigate('BarangPemakaian', item)}
+        onPress={() => navigation.navigate('Artikel', item)}
         activeOpacity={1.0}>
-        <Image style={styles.image} source={{uri: item.foto}} />
         <View
           style={{
             flexDirection: 'row',
-            alignItems: 'flex-start',
-            justifyContent: 'flex-start',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
           }}>
           <Text
             style={{
               fontFamily: fonts.secondary[600],
-              fontSize: 14,
-              flex: 1,
+              fontSize: 20,
+              padding: 3,
               backgroundColor: colors.primary,
-              paddingHorizontal: 10,
-              paddingVertical: 5,
-              // borderBottomLeftRadius: 20,
-              // borderTopRightRadius: 20,
+              borderBottomLeftRadius: 10,
+              paddingHorizontal: 20,
               color: colors.white,
             }}>
-            {item.nama_barang}
+            {item.point} Point
           </Text>
         </View>
+        <Image style={styles.image} source={{uri: item.foto}} />
+
         <View style={styles.detailsContainer}>
           <View
             style={{
               flex: 1,
             }}>
-            <Text style={styles.title}>
-              {' '}
-              Rp. {new Intl.NumberFormat().format(item.harga)} / {item.uom}
-            </Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-            }}>
-            <Text style={styles.subTitle}>{item.keterangan}</Text>
+            <Text style={styles.title}>{item.nama}</Text>
           </View>
         </View>
       </TouchableOpacity>
     );
   };
 
-  const navigation = useNavigation();
-  const [data, setData] = useState([]);
-
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: 10,
-        backgroundColor: '#FFF',
-      }}>
-      <View
-        style={{
-          flexDirection: 'row',
-          // justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: 5,
-        }}>
-        <Icon type="ionicon" name="grid" color={colors.primary} size={16} />
-        <Text
-          style={{
-            fontFamily: 'Montserrat-SemiBold',
-            color: colors.primary,
-            left: 10,
-            fontSize: 16,
-          }}>
-          PILIH KEBUTUHAN
-        </Text>
-      </View>
+    <View style={{padding: 10}}>
       <FlatList
-        numColumns={2}
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
@@ -134,12 +100,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: 'white',
     marginBottom: 20,
-    flex: 0.5,
+    flex: 1,
     marginHorizontal: 5,
   },
   image: {
     width: '100%',
-    height: 200,
+    aspectRatio: 2,
+    resizeMode: 'contain',
   },
   detailsContainer: {
     padding: 10,
@@ -151,7 +118,7 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 7,
     fontFamily: 'Nunito-ExtraBold',
-    fontSize: 14,
+    fontSize: 18,
     color: colors.black,
   },
   subTitle: {

@@ -9,13 +9,14 @@ import {
   Image,
 } from 'react-native';
 
+import LottieView from 'lottie-react-native';
 import {getData} from '../../utils/localStorage';
 import axios from 'axios';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {MyButton, MyInput, MyGap, MyPicker} from '../../components';
 import {colors} from '../../utils/colors';
 import {TouchableOpacity, Swipeable} from 'react-native-gesture-handler';
-import {fonts} from '../../utils/fonts';
+import {fonts, windowWidth} from '../../utils/fonts';
 import {useIsFocused} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
 import 'intl';
@@ -24,104 +25,142 @@ import {showMessage} from 'react-native-flash-message';
 
 export default function Checkout({navigation, route}) {
   const item = route.params;
+  const [loading, setLoading] = useState(false);
 
   const [kirim, setKirim] = useState(item);
 
   const simpan = () => {
-    console.log(item);
+    setLoading(true);
+    console.log('kirim ke server', item);
+    setTimeout(() => {
+      axios
+        .post(
+          'https://zavalabs.com/wandhaelektronik/api/transaksi_add.php',
+          item,
+        )
+        .then(res => {
+          console.log(res);
+          setLoading(false);
+        });
 
-    navigation.navigate('Bayar', item);
-  };
-
-  const simpan2 = () => {
-    console.log(item);
-
-    navigation.navigate('Bayar2', item);
+      navigation.replace('MainApp');
+      showMessage({
+        type: 'success',
+        message: 'Transaksi Berhasil, Terima kasih',
+      });
+    }, 1200);
   };
 
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View>
-          {/* data penerima */}
+    <>
+      <SafeAreaView style={{flex: 1}}>
+        <ScrollView>
+          <View>
+            {/* data penerima */}
 
-          <View style={{padding: 10}}>
-            <MyInput
-              label="Nama Penerima"
-              iconname="person"
-              placeholder="Masukan nama penerima"
-              value={kirim.nama_lengkap}
-              onChangeText={val =>
-                setKirim({
-                  ...kirim,
-                  nama_lengkap: val,
-                })
-              }
-            />
-            <MyGap jarak={5} />
-            <MyInput
-              label="Nomor Handphone"
-              iconname="call"
-              keyboardType="number-pad"
-              placeholder="Masukan nomor telepon"
-              value={kirim.nohp}
-              onChangeText={val =>
-                setKirim({
-                  ...kirim,
-                  nohp: val,
-                })
-              }
-            />
-            <MyGap jarak={5} />
-            <MyInput
-              label="E-Mail"
-              iconname="mail"
-              placeholder="Masukan alamat email"
-              value={kirim.email}
-              onChangeText={val =>
-                setKirim({
-                  ...kirim,
-                  email: val,
-                })
-              }
-            />
-            <MyGap jarak={5} />
-            <MyInput
-              label="Alamat lengkap"
-              iconname="map"
-              placeholder="Alamat Lengkap"
-              value={kirim.alamat}
-              onChangeText={val =>
-                setKirim({
-                  ...kirim,
-                  alamat: val,
-                })
-              }
-            />
-            <MyGap jarak={5} />
+            <View style={{padding: 10}}>
+              <MyInput
+                label="Nama Penerima"
+                iconname="person"
+                placeholder="Masukan nama penerima"
+                value={kirim.nama_lengkap}
+                onChangeText={val =>
+                  setKirim({
+                    ...kirim,
+                    nama_lengkap: val,
+                  })
+                }
+              />
+              <MyGap jarak={5} />
+              <MyInput
+                label="Nomor Handphone"
+                iconname="call"
+                keyboardType="number-pad"
+                placeholder="Masukan nomor telepon"
+                value={kirim.nohp}
+                onChangeText={val =>
+                  setKirim({
+                    ...kirim,
+                    nohp: val,
+                  })
+                }
+              />
+              <MyGap jarak={5} />
+              <MyInput
+                label="E-Mail"
+                iconname="mail"
+                placeholder="Masukan alamat email"
+                value={kirim.email}
+                onChangeText={val =>
+                  setKirim({
+                    ...kirim,
+                    email: val,
+                  })
+                }
+              />
+              <MyGap jarak={5} />
+              <MyInput
+                label="Alamat lengkap"
+                iconname="map"
+                placeholder="Alamat Lengkap"
+                value={kirim.alamat}
+                onChangeText={val =>
+                  setKirim({
+                    ...kirim,
+                    alamat: val,
+                  })
+                }
+              />
+              <MyGap jarak={5} />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                borderBottomWidth: 1,
+                borderBottomColor: colors.border,
+              }}>
+              <Text
+                style={{
+                  flex: 1,
+                  color: colors.black,
+                  fontSize: 16,
+                  fontFamily: fonts.secondary[400],
+                  padding: 10,
+                }}>
+                Total Transaksi
+              </Text>
+              <Text
+                style={{
+                  color: colors.primary,
+                  fontSize: windowWidth / 15,
+                  fontFamily: fonts.secondary[600],
+                  padding: 10,
+                }}>
+                Rp. {new Intl.NumberFormat().format(item.total)}
+              </Text>
+            </View>
           </View>
+        </ScrollView>
+        <View style={{padding: 10}}>
+          <MyButton
+            onPress={simpan}
+            title="SIMPAN TRANSAKSI"
+            warna={colors.primary}
+            style={{
+              justifyContent: 'flex-end',
+            }}
+          />
         </View>
-      </ScrollView>
-      <View style={{padding: 10}}>
-        <MyButton
-          onPress={simpan}
-          title="PEMBAYARAN VIA TRANSFER"
-          warna={colors.secondary}
-          style={{
-            justifyContent: 'flex-end',
-          }}
+      </SafeAreaView>
+      {loading && (
+        <LottieView
+          source={require('../../assets/animation.json')}
+          autoPlay
+          loop
+          style={{backgroundColor: colors.primary}}
         />
-        <MyGap jarak={10} />
-        <MyButton
-          onPress={simpan2}
-          title="PEMBAYARAN VIA COD"
-          warna={colors.primary}
-          style={{
-            justifyContent: 'flex-end',
-          }}
-        />
-      </View>
-    </SafeAreaView>
+      )}
+    </>
   );
 }
 

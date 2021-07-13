@@ -17,7 +17,7 @@ import {Icon} from 'react-native-elements';
 import axios from 'axios';
 import {colors} from '../../utils/colors';
 import LottieView from 'lottie-react-native';
-import {fonts} from '../../utils/fonts';
+import {fonts, windowWidth} from '../../utils/fonts';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 
@@ -46,13 +46,13 @@ export default function Search({navigation, route}) {
               fontFamily: fonts.secondary[600],
               fontSize: 14,
               flex: 1,
-              backgroundColor: colors.secondary,
+              backgroundColor: colors.primary,
               paddingHorizontal: 10,
               paddingVertical: 5,
               // borderBottomLeftRadius: 20,
               // borderTopRightRadius: 20,
               color: colors.white,
-              textAlign: 'center',
+              // textAlign: 'center',
             }}>
             {item.nama_barang}
           </Text>
@@ -62,16 +62,60 @@ export default function Search({navigation, route}) {
             style={{
               flex: 1,
             }}>
-            <Text style={styles.title}>
+            <Text
+              style={{
+                fontFamily: fonts.secondary[600],
+                fontSize: windowWidth / 25,
+                color: colors.warning,
+              }}>
               {' '}
-              Rp. {new Intl.NumberFormat().format(item.harga)} / {item.uom}
+              Rp. {new Intl.NumberFormat().format(item.harga)}
             </Text>
-          </View>
-          <View
-            style={{
-              flex: 1,
-            }}>
-            <Text style={styles.subTitle}>{item.keterangan}</Text>
+
+            {item.diskon > 0 ? (
+              <>
+                <View style={{flexDirection: 'row'}}>
+                  <Text
+                    style={{
+                      fontFamily: fonts.secondary[600],
+                      fontSize: windowWidth / 30,
+                      color: colors.border,
+                      left: 5,
+                      textDecorationLine: 'line-through',
+                      textDecorationStyle: 'solid',
+                      textDecorationColor: colors.black,
+                    }}>
+                    {' '}
+                    Rp. {new Intl.NumberFormat().format(item.harga_awal)}
+                  </Text>
+                  <Text
+                    style={{
+                      left: 10,
+                      backgroundColor: colors.warning,
+                      borderRadius: 5,
+                      color: colors.white,
+                      paddingHorizontal: 5,
+                    }}>
+                    {Math.round(100 - (item.harga / item.harga_awal) * 100)}%
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    padding: 10,
+                  }}>
+                  <Text style={styles.subTitle}>{item.keterangan}</Text>
+                </View>
+              </>
+            ) : (
+              <View
+                style={{
+                  flex: 1,
+                  padding: 10,
+                }}>
+                <Text style={styles.subTitle}>{item.keterangan}</Text>
+              </View>
+            )}
           </View>
         </View>
       </TouchableOpacity>
@@ -83,7 +127,7 @@ export default function Search({navigation, route}) {
     setTimeout(() => {
       setCari(true);
       axios
-        .post('https://zavalabs.com/mylaundry/api/barang_cari.php', {
+        .post('https://zavalabs.com/wandhaelektronik/api/barang_cari_key.php', {
           cari: key,
         })
         .then(res => {

@@ -20,7 +20,7 @@ export default function ListDetail({navigation, route}) {
 
   useEffect(() => {
     axios
-      .post('https://zavalabs.com/mylaundry/api/transaksi_detail.php', {
+      .post('https://zavalabs.com/wandhaelektronik/api/transaksi_detail.php', {
         kode: item.kode,
       })
       .then(res => {
