@@ -46,12 +46,12 @@ export default function Search({navigation, route}) {
               fontFamily: fonts.secondary[600],
               fontSize: 14,
               flex: 1,
-              backgroundColor: colors.primary,
-              paddingHorizontal: 10,
+              // backgroundColor: colors.primary,
+              paddingHorizontal: 5,
               paddingVertical: 5,
               // borderBottomLeftRadius: 20,
               // borderTopRightRadius: 20,
-              color: colors.white,
+              color: colors.black,
               // textAlign: 'center',
             }}>
             {item.nama_barang}
@@ -271,10 +271,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 200,
+    resizeMode: 'contain',
+    aspectRatio: 1,
   },
   detailsContainer: {
-    padding: 10,
+    // padding: 10,
     flex: 1,
   },
   detailsContainerButton: {
@@ -282,14 +283,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 7,
-    fontFamily: fonts.secondary[600],
+    fontFamily: fonts.secondary[800],
     fontSize: 15,
-    color: colors.primary,
+    color: colors.warning,
   },
   subTitle: {
     // flex: 1,
     // backgroundColor: 'red',
-    fontFamily: fonts.secondary[600],
+    fontFamily: fonts.secondary[400],
     fontSize: 14,
     color: '#000',
     marginBottom: 5,

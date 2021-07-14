@@ -52,13 +52,13 @@ export default function BottomNavigator({state, descriptors, navigation}) {
         let iconName = 'home';
 
         if (label === 'Home') {
-          iconName = 'home';
+          iconName = 'home-outline';
         } else if (label === 'Account') {
-          iconName = 'person';
+          iconName = 'person-outline';
         } else if (label === 'Transaksi') {
-          iconName = 'list';
-        } else if (label === 'Notifikasi') {
-          iconName = 'notifications';
+          iconName = 'newspaper-outline';
+        } else if (label === 'ListRedeem') {
+          iconName = 'bookmarks-outline';
         } else if (label === 'Cart') {
           iconName = 'cart';
         }
@@ -130,7 +130,7 @@ export default function BottomNavigator({state, descriptors, navigation}) {
                         ? colors.primary
                         : '#919095',
                   }}>
-                  {label}
+                  {label == 'ListRedeem' ? 'Redeem' : label}
                 </Text>
               </View>
             </View>

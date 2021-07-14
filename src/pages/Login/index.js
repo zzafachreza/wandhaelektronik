@@ -71,10 +71,11 @@ export default function Login({navigation}) {
   return (
     <ImageBackground style={styles.page}>
       <ScrollView
+        showsVerticalScrollIndicator={false}
         style={{
           flex: 1,
         }}>
-        <View style={{height: 250, flex: 1}}>
+        <View style={{height: 200, flex: 1}}>
           <LottieView
             style={{flex: 1}}
             source={require('../../assets/getstarted.json')}

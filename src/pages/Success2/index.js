@@ -23,6 +23,10 @@ export default function Success2({navigation, route}) {
     useNativeDriver: false,
   }).start();
 
+  setTimeout(() => {
+    navigation.replace('MainApp');
+  }, 1300);
+
   const messege = route.params.messege;
   return (
     <SafeAreaView
@@ -48,19 +52,8 @@ export default function Success2({navigation, route}) {
             color: 'black',
             bottom: txt,
           }}>
-          Berhasil di tambahkan
+          Redeem Point Berhasil
         </Animated.Text>
-      </View>
-      <View
-        style={{
-          //   flex: 1,
-          padding: 10,
-        }}>
-        <MyButton
-          title="LIHAT KERANJANG"
-          warna={colors.secondary}
-          onPress={() => navigation.replace('Cart')}
-        />
       </View>
     </SafeAreaView>
   );

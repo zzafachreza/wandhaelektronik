@@ -34,7 +34,7 @@ export default function Hadiah() {
     return (
       <TouchableOpacity
         style={styles.card}
-        onPress={() => navigation.navigate('Artikel', item)}
+        onPress={() => navigation.navigate('Redeem', item)}
         activeOpacity={1.0}>
         <View
           style={{

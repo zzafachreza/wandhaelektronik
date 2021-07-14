@@ -12,7 +12,7 @@ import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
+import {fonts, windowHeight} from '../../utils/fonts';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import {color} from 'react-native-elements/dist/helpers';
@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: colors.primary,
     marginBottom: 10,
+    justifyContent: 'center',
     flex: 1,
     marginHorizontal: 5,
   },

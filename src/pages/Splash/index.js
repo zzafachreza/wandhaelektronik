@@ -23,7 +23,7 @@ export default function Splash({navigation}) {
   const scaleText = new Animated.Value(100);
 
   Animated.timing(scaleLogo, {
-    toValue: 1,
+    toValue: 0.8,
     duration: 1000,
   }).start();
 

@@ -24,6 +24,8 @@ import BarangPemakaian from './BarangPemakaian';
 import Akses from './Akses';
 import Laporan from './Laporan';
 import Hadiah from './Hadiah';
+import Redeem from './Redeem';
+import ListRedeem from './ListRedeem';
 
 export {
   Splash,
@@ -52,4 +54,6 @@ export {
   Akses,
   Laporan,
   Hadiah,
+  Redeem,
+  ListRedeem,
 };

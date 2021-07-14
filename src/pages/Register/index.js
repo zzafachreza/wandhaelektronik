@@ -8,6 +8,7 @@ import {
   ScrollView,
   ImageBackground,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
@@ -56,8 +57,8 @@ export default function Register({navigation}) {
       });
   };
   return (
-    <ImageBackground style={styles.page}>
-      <ScrollView style={styles.page}>
+    <SafeAreaView style={styles.page}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.page}>
         {/* <Image
         source={require('../../assets/logooren.png')}
         style={styles.image}
@@ -145,13 +146,14 @@ export default function Register({navigation}) {
             })
           }
         />
-        <MyGap jarak={40} />
+        <MyGap jarak={20} />
         <MyButton
           warna={colors.primary}
           title="REGISTER"
           Icons="log-in"
           onPress={simpan}
         />
+        <MyGap jarak={20} />
       </ScrollView>
       {loading && (
         <LottieView
@@ -164,7 +166,7 @@ export default function Register({navigation}) {
           }}
         />
       )}
-    </ImageBackground>
+    </SafeAreaView>
   );
 }
 

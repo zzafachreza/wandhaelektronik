@@ -35,6 +35,8 @@ import {
   Search2,
   Laporan,
   Hadiah,
+  Redeem,
+  ListRedeem,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -48,6 +50,7 @@ const MainApp = () => {
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Transaksi" component={ListData} />
+      <Tab.Screen name="ListRedeem" component={ListRedeem} />
       {/* <Tab.Screen name="Cart" component={Cart} /> */}
       {/* <Tab.Screen name="Notifikasi" component={Notifikasi} /> */}
       <Tab.Screen name="Account" component={Account} />
@@ -215,6 +218,33 @@ export default function Router() {
         component={Hadiah}
         options={({route, navigation}) => ({
           title: 'Daftar Hadiah',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: colors.primary,
+            elevation: 0, // remove shadow on Android
+          },
+          cardStyleInterpolator: ({current, layouts}) => {
+            return {
+              cardStyle: {
+                transform: [
+                  {
+                    translateX: current.progress.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [layouts.screen.width, 0],
+                    }),
+                  },
+                ],
+              },
+            };
+          },
+        })}
+      />
+
+      <Stack.Screen
+        name="Redeem"
+        component={Redeem}
+        options={({route, navigation}) => ({
+          title: 'Redeem Point',
           headerTintColor: 'white',
           headerStyle: {
             backgroundColor: colors.primary,

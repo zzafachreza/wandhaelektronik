@@ -14,8 +14,8 @@ export default function App() {
 
   PushNotification.createChannel(
     {
-      channelId: 'zvl-sebatiku', // (required)
-      channelName: 'sebatiku', // (required)
+      channelId: 'zvl-wandahelektronik', // (required)
+      channelName: 'wandahelektronik', // (required)
       channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
       playSound: true, // (optional) default: true
       soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
@@ -27,7 +27,7 @@ export default function App() {
   const getPushNotifikasi = (title, body) => {
     PushNotification.localNotification({
       /* Android Only Properties */
-      channelId: 'zvl-sebatiku', // (required) channelId, if the channel doesn't exist, notification will not trigger.
+      channelId: 'zvl-wandahelektronik', // (required) channelId, if the channel doesn't exist, notification will not trigger.
       title: title, // (optional)
       message: body, // (required)
     });

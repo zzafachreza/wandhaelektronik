@@ -14,25 +14,72 @@ import {
 } from 'react-native';
 import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
-import {getData} from '../../utils/localStorage';
+import {storeData, getData} from '../../utils/localStorage';
 import {Icon} from 'react-native-elements';
 import MyCarouser from '../../components/MyCarouser';
 import MyTerbaik from '../../components/MyTerbaik';
 import axios from 'axios';
+import messaging from '@react-native-firebase/messaging';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 export default function Home({navigation}) {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState('');
+  const [point, setPoint] = useState(0);
+
+  messaging().onMessage(async remoteMessage => {
+    // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    const json = JSON.stringify(remoteMessage);
+    const obj = JSON.parse(json);
+    // alert(obj.notification);
+    // console.log('list transaksi', obj.notification);
+    getData('user').then(res => {
+      setUser(res);
+      // console.log(res);
+      // alert('email' + res.email + ' dan password ' + res.password);
+
+      axios
+        .post('https://zavalabs.com/wandhaelektronik/api/point.php', {
+          id_member: res.id,
+        })
+        .then(respoint => {
+          setPoint(respoint.data);
+          console.log('get apoint', respoint.data);
+        });
+
+      axios
+        .post('https://zavalabs.com/wandhaelektronik/api/get_member.php', {
+          email: res.email,
+          password: res.password,
+        })
+        .then(rese => {
+          setUser(rese.data);
+          storeData('user', rese.data);
+        });
+    });
+  });
 
   useEffect(() => {
     getData('user').then(res => {
       console.log(res);
       setUser(res);
+
+      axios
+        .post('https://zavalabs.com/wandhaelektronik/api/point.php', {
+          id_member: res.id,
+        })
+        .then(respoint => {
+          setPoint(respoint.data);
+          console.log('get apoint', respoint.data);
+        });
+
       getData('token').then(res => {
         console.log('data token,', res);
         setToken(res.token);
       });
     });
+
     axios
       .post('https://zavalabs.com/wandhaelektronik/api/update_token.php', {
         id_member: user.id,
@@ -99,7 +146,12 @@ export default function Home({navigation}) {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Icon type="ionicon" name="cart-outline" color={colors.white} />
+            <Icon
+              type="ionicon"
+              name="cart-outline"
+              color={colors.white}
+              size={windowWidth / 12}
+            />
           </TouchableOpacity>
         </View>
 
@@ -127,7 +179,7 @@ export default function Home({navigation}) {
             }}>
             <Icon
               type="ionicon"
-              name="ribbon"
+              name="ribbon-outline"
               color={colors.primary}
               size={windowWidth / 13}
             />
@@ -146,7 +198,7 @@ export default function Home({navigation}) {
                   color: colors.primary,
                   fontFamily: fonts.secondary[600],
                 }}>
-                {parseFloat(user.point).toLocaleString('id-ID')}
+                {new Intl.NumberFormat().format(point)}
               </Text>
             </View>
           </TouchableOpacity>

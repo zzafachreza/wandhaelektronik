@@ -15,7 +15,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {MyButton} from '../../components';
 import {colors} from '../../utils/colors';
 import {TouchableOpacity, Swipeable} from 'react-native-gesture-handler';
-import {fonts} from '../../utils/fonts';
+import {fonts, windowWidth} from '../../utils/fonts';
 import {useIsFocused} from '@react-navigation/native';
 import {Icon} from 'react-native-elements';
 import 'intl';
@@ -101,9 +101,9 @@ export default function Cart({navigation, route}) {
           style={{
             marginVertical: 10,
             borderRadius: 10,
-            borderWidth: 1,
             padding: 10,
-            borderColor: colors.secondary,
+            elevation: 2,
+            backgroundColor: colors.white,
           }}>
           <View style={{flexDirection: 'row'}}>
             <Image
@@ -116,35 +116,38 @@ export default function Cart({navigation, route}) {
               source={{uri: item.foto}}
             />
             <View style={{marginLeft: 10, flex: 1}}>
-              <Text style={{fontFamily: fonts.secondary[600]}}>
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 30,
+                }}>
                 {item.nama_barang}
               </Text>
 
-              <Text style={{fontFamily: fonts.secondary[400], flex: 1}}>
+              <Text
+                style={{
+                  fontFamily: fonts.secondary[400],
+                  flex: 1,
+                  fontSize: windowWidth / 30,
+                }}>
                 {new Intl.NumberFormat().format(item.harga)} x {item.qty}
               </Text>
-              <Text
+              <View
                 style={{
-                  fontFamily: fonts.secondary[600],
-                  color: colors.primary,
-                  fontSize: 16,
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-end',
                 }}>
-                {item.uom}
-              </Text>
-            </View>
-            <View style={{padding: 10}}>
-              <Text
-                style={{
-                  fontFamily: fonts.secondary[600],
-                  color: colors.secondary,
-                  fontSize: 20,
-                }}>
-                {new Intl.NumberFormat().format(item.total)}
-              </Text>
+                <Text
+                  style={{
+                    fontFamily: fonts.secondary[600],
+                    color: colors.warning,
+                    fontSize: windowWidth / 25,
+                  }}>
+                  {new Intl.NumberFormat().format(item.total)}
+                </Text>
+              </View>
             </View>
           </View>
-
-          <View style={{flexDirection: 'row'}}></View>
         </View>
       </Swipeable>
     );
@@ -173,8 +176,9 @@ export default function Cart({navigation, route}) {
           }}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: windowWidth / 20,
               fontFamily: fonts.secondary[600],
+              color: colors.black,
               left: 10,
             }}>
             Rp. {new Intl.NumberFormat().format(sub)}
@@ -200,7 +204,7 @@ export default function Cart({navigation, route}) {
           }}>
           <Text
             style={{
-              fontSize: 20,
+              fontSize: windowWidth / 18,
               fontFamily: fonts.secondary[600],
               color: 'white',
             }}>

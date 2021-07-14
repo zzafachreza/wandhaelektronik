@@ -18,7 +18,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {MyButton} from '../../components';
 import {useIsFocused} from '@react-navigation/native';
 
-export default function ListData({navigation}) {
+export default function ListRedeem({navigation}) {
   const isFocused = useIsFocused();
   const [data, setData] = useState([]);
   const [user, setUser] = useState({});
@@ -34,7 +34,7 @@ export default function ListData({navigation}) {
       // console.log(res);
 
       axios
-        .post('https://zavalabs.com/wandhaelektronik/api/transaksi.php', {
+        .post('https://zavalabs.com/wandhaelektronik/api/redeem.php', {
           id_member: res.id,
         })
         .then(res => {
@@ -51,7 +51,7 @@ export default function ListData({navigation}) {
         // console.log(res);
 
         axios
-          .post('https://zavalabs.com/wandhaelektronik/api/transaksi.php', {
+          .post('https://zavalabs.com/wandhaelektronik/api/redeem.php', {
             id_member: res.id,
           })
           .then(res => {
@@ -84,40 +84,23 @@ export default function ListData({navigation}) {
                 borderWidth: 1,
                 backgroundColor: colors.white,
               }}>
-              <TouchableOpacity
-                onPress={() => {
-                  console.log('cek detail', item);
-                  navigation.navigate('ListDetail', item);
-                }}>
+              <TouchableOpacity>
                 <View style={{flex: 1, padding: 10}}>
-                  <Text
-                    style={{
-                      fontFamily: fonts.secondary[400],
-                      fontSize: windowWidth / 30,
-                    }}>
-                    Nomor Transaksi - Nama Pelanggan :
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: fonts.secondary[600],
-                      fontSize: windowWidth / 25,
-                      color: colors.black,
-                    }}>
-                    {item.kode}
-                  </Text>
                   <Text
                     style={{
                       fontFamily: fonts.secondary[600],
                       fontSize: windowWidth / 25,
                       color: colors.primary,
                     }}>
-                    {item.nama_pemesan}
+                    {item.kode}
                   </Text>
                   <Text
                     style={{
                       fontFamily: fonts.secondary[400],
+                      fontSize: windowWidth / 25,
+                      color: colors.black,
                     }}>
-                    {item.tanggal}
+                    {item.nama_lengkap} ( {item.tanggal} )
                   </Text>
                 </View>
                 <View style={{flexDirection: 'row'}}>
@@ -126,18 +109,24 @@ export default function ListData({navigation}) {
                       flex: 1,
                       justifyContent: 'flex-start',
                       alignItems: 'flex-start',
+                      paddingLeft: 10,
                     }}>
-                    {item.status === 'SELESAI' && (
-                      <Text
-                        style={{
-                          fontFamily: fonts.secondary[600],
-                          fontSize: windowWidth / 20,
-                          color: colors.success,
-                          padding: 10,
-                        }}>
-                        {item.point} Point
-                      </Text>
-                    )}
+                    <Text
+                      style={{
+                        fontFamily: fonts.secondary[600],
+                        fontSize: windowWidth / 30,
+                        color: colors.primary,
+                      }}>
+                      {item.nama_hadiah}
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: fonts.secondary[400],
+                        fontSize: windowWidth / 30,
+                        color: colors.black,
+                      }}>
+                      Jumlah : {item.jumlah}
+                    </Text>
                   </View>
                   <View
                     style={{
@@ -153,7 +142,7 @@ export default function ListData({navigation}) {
                         color: colors.warning,
                         padding: 10,
                       }}>
-                      Rp. {item.total}
+                      {item.point} Point
                     </Text>
                   </View>
                 </View>
@@ -175,16 +164,16 @@ export default function ListData({navigation}) {
                     onPress={() => {
                       axios
                         .post(
-                          'https://zavalabs.com/wandhaelektronik/api/transaksi_hapus.php',
+                          'https://zavalabs.com/wandhaelektronik/api/redeem_hapus.php',
                           {
                             id_member: item.id_member,
-                            kode: item.kode,
+                            id: item.id,
                           },
                         )
                         .then(res => {
                           axios
                             .post(
-                              'https://zavalabs.com/wandhaelektronik/api/transaksi.php',
+                              'https://zavalabs.com/wandhaelektronik/api/redeem.php',
                               {
                                 id_member: item.id_member,
                               },
