@@ -22,6 +22,7 @@ import axios from 'axios';
 import messaging from '@react-native-firebase/messaging';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
+import MyTerbaik2 from '../../components/MyTerbaik2';
 
 export default function Home({navigation}) {
   const [user, setUser] = useState([]);
@@ -131,28 +132,68 @@ export default function Home({navigation}) {
             </Text>
             <Text
               style={{
-                fontSize: windowWidth / 22,
+                fontSize: windowWidth / 25,
                 color: colors.white,
                 fontFamily: fonts.secondary[600],
               }}>
               {user.nama_lengkap}
             </Text>
           </View>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Cart')}
+          <View
             style={{
-              padding: 20,
-              justifyContent: 'center',
-              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              flex: 1,
             }}>
-            <Icon
-              type="ionicon"
-              name="cart-outline"
-              color={colors.white}
-              size={windowWidth / 12}
-            />
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => Linking.openURL('https://wa.me/085248695042')}
+              style={{
+                padding: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon
+                type="ionicon"
+                name="logo-whatsapp"
+                color={colors.white}
+                size={windowWidth / 12}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL(
+                  'https://www.instagram.com/elektronik_handphone_muarabada/',
+                )
+              }
+              style={{
+                padding: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon
+                type="ionicon"
+                name="logo-instagram"
+                color={colors.white}
+                size={windowWidth / 12}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Cart')}
+              style={{
+                padding: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Icon
+                type="ionicon"
+                name="cart-outline"
+                color={colors.white}
+                size={windowWidth / 12}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* bagian untuk point dan redeem */}
@@ -311,6 +352,7 @@ export default function Home({navigation}) {
 
         {/* <MyKategori /> */}
         <MyTerbaik />
+        <MyTerbaik2 />
       </ScrollView>
     </ImageBackground>
   );

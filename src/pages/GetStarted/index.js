@@ -52,11 +52,18 @@ export default function GetStarted({navigation}) {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <LottieView
+        {/* <LottieView
           style={{flex: 1}}
           source={require('../../assets/getstarted.json')}
           autoPlay
           loop={true}
+        /> */}
+        <Image
+          source={require('../../assets/logo.png')}
+          style={{
+            resizeMode: 'contain',
+            aspectRatio: 0.2,
+          }}
         />
       </View>
 

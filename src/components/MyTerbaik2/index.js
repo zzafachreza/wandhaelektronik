@@ -17,10 +17,10 @@ import 'intl';
 import 'intl/locale-data/jsonp/en';
 import {color} from 'react-native-elements/dist/helpers';
 
-export default function MyTerbaik() {
+export default function MyTerbaik2() {
   useEffect(() => {
     axios
-      .get('https://zavalabs.com/wandhaelektronik/api/brand.php')
+      .get('https://zavalabs.com/wandhaelektronik/api/brand2.php')
       .then(res => {
         console.log(res.data);
         setData(res.data);
@@ -67,7 +67,7 @@ export default function MyTerbaik() {
               left: 10,
               fontSize: 16,
             }}>
-            HANDPHONE
+            ELEKTRONIK
           </Text>
         </View>
         <View style={{padding: 10}}>

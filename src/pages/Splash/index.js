@@ -19,11 +19,11 @@ import LottieView from 'lottie-react-native';
 export default function Splash({navigation}) {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
-  const scaleLogo = new Animated.Value(0.5);
+  const scaleLogo = new Animated.Value(0.1);
   const scaleText = new Animated.Value(100);
 
   Animated.timing(scaleLogo, {
-    toValue: 0.8,
+    toValue: 0.2,
     duration: 1000,
   }).start();
 
@@ -55,18 +55,18 @@ export default function Splash({navigation}) {
       <View
         style={{
           flex: 1,
-          justifyContent: 'flex-end',
+          justifyContent: 'center',
           alignItems: 'center',
-          paddingBottom: windowHeight / 4,
+          // paddingBottom: windowHeight / 4,
         }}>
         <Animated.Image
-          source={require('../..//assets/logo.png')}
+          source={require('../../assets/logo.png')}
           style={{
             resizeMode: 'contain',
             aspectRatio: scaleLogo,
           }}
         />
-        <Animated.View
+        {/* <Animated.View
           style={{
             top: scaleText,
           }}>
@@ -86,7 +86,7 @@ export default function Splash({navigation}) {
             }}>
             ELEKTRONIK
           </Text>
-        </Animated.View>
+        </Animated.View> */}
       </View>
     </SafeAreaView>
   );

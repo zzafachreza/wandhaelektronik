@@ -75,12 +75,28 @@ export default function Login({navigation}) {
         style={{
           flex: 1,
         }}>
-        <View style={{height: 200, flex: 1}}>
-          <LottieView
+        <View
+          style={{
+            height: 220,
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.primary,
+            padding: 10,
+            borderRadius: 10,
+          }}>
+          {/* <LottieView
             style={{flex: 1}}
             source={require('../../assets/getstarted.json')}
             autoPlay
             loop
+          /> */}
+          <Image
+            source={require('../../assets/logo-primary.png')}
+            style={{
+              resizeMode: 'contain',
+              aspectRatio: 0.2,
+            }}
           />
         </View>
         <View style={styles.page}>
@@ -150,7 +166,7 @@ export default function Login({navigation}) {
 
 const styles = StyleSheet.create({
   page: {
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
     flex: 1,
     padding: 10,
   },
