@@ -50,15 +50,6 @@ export default function MyTerbaik() {
           // padding: 10,
           backgroundColor: '#FFF',
         }}>
-        <Image
-          resizeMode="stretch"
-          source={require('../../assets/list.png')}
-          style={{
-            width: windowWidth,
-            height: windowWidth / 1.7,
-          }}
-        />
-
         <View style={{padding: 10}}>
           <FlatList
             numColumns={2}
