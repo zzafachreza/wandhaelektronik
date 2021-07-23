@@ -146,7 +146,11 @@ export default function Home({navigation}) {
               flex: 1,
             }}>
             <TouchableOpacity
-              onPress={() => Linking.openURL('https://wa.me/085248695042')}
+              onPress={() =>
+                Linking.openURL(
+                  'https://api.whatsapp.com/send/?phone=6285248695042',
+                )
+              }
               style={{
                 padding: 10,
                 justifyContent: 'center',

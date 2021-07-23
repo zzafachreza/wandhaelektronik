@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, ImageBackground} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {
-  Avatar,
-  Accessory,
-  Divider,
-  ListItem,
-  // Icon,
-  Button,
-} from 'react-native-elements';
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  Linking,
+} from 'react-native';
 import {storeData, getData} from '../../utils/localStorage';
 import {colors} from '../../utils/colors';
 import {fonts} from '../../utils/fonts';
+import {MyButton, MyInput, MyGap, MyPicker} from '../../components';
 
 export default function Account({navigation}) {
   const [user, setUser] = useState({});
@@ -81,7 +80,6 @@ export default function Account({navigation}) {
             }}>
             {user.nama_lengkap}
           </Text>
-          <Divider style={{backgroundColor: colors.border, height: 1}} />
           <Text
             style={{
               fontSize: 18,
@@ -92,13 +90,176 @@ export default function Account({navigation}) {
             {user.tlp}
           </Text>
         </View>
+        {/* bri */}
+        <View
+          style={{
+            backgroundColor: colors.white,
+            padding: 10,
+            margin: 10,
+            borderRadius: 10,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              borderBottomWidth: 1,
+              borderBottomColor: colors.border,
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.black,
+                fontFamily: fonts.secondary[400],
+                padding: 10,
+              }}>
+              Transfer Ke BANK :
+            </Text>
+            <Image
+              resizeMode="stretch"
+              source={require('../../assets/bri.png')}
+              style={{width: 150, height: 35, margin: 10}}
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              borderBottomWidth: 1,
+              borderBottomColor: colors.border,
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[400],
+                padding: 10,
+              }}>
+              Nomor Rekening
+            </Text>
+            <Text
+              style={{
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[600],
+                padding: 10,
+              }}>
+              360301020813537
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[400],
+                padding: 10,
+              }}>
+              Atas Nama
+            </Text>
+            <Text
+              style={{
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[600],
+                padding: 10,
+              }}>
+              Muhammad Ridwan
+            </Text>
+          </View>
+        </View>
+        {/* bri */}
+
+        {/* mandiri */}
+        <View
+          style={{
+            backgroundColor: colors.white,
+            padding: 10,
+            margin: 10,
+            borderRadius: 10,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              borderBottomWidth: 1,
+              borderBottomColor: colors.border,
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.black,
+                fontFamily: fonts.secondary[400],
+                padding: 10,
+              }}>
+              Transfer Ke BANK :
+            </Text>
+            <Image
+              resizeMode="stretch"
+              source={require('../../assets/mandiri.png')}
+              style={{width: 150, height: 45, margin: 10}}
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              borderBottomWidth: 1,
+              borderBottomColor: colors.border,
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[400],
+                padding: 10,
+              }}>
+              Nomor Rekening
+            </Text>
+            <Text
+              style={{
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[600],
+                padding: 10,
+              }}>
+              1480016098967
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[400],
+                padding: 10,
+              }}>
+              Atas Nama
+            </Text>
+            <Text
+              style={{
+                color: colors.black,
+                fontSize: 16,
+                fontFamily: fonts.secondary[600],
+                padding: 10,
+              }}>
+              Nurwahidah
+            </Text>
+          </View>
+        </View>
+        {/* mandiri */}
         <View
           style={{
             padding: 10,
             // backgroundColor: 'green',
             flex: 1,
           }}>
-          <View
+          {/* <View
             style={{
               marginVertical: 5,
               padding: 10,
@@ -137,29 +298,26 @@ export default function Account({navigation}) {
               }}>
               {user.alamat}
             </Text>
-          </View>
-          <Button
+          </View> */}
+
+          <MyButton
             onPress={handleSave}
-            title="Sign Out"
-            icon={
-              <Icon
-                style={{
-                  marginRight: 5,
-                }}
-                name="sign-out"
-                size={15}
-                color="white"
-              />
+            title="Keluar"
+            borderColor={colors.white}
+            borderSize={1}
+            iconColor={colors.white}
+            Icons="log-out-outline"
+          />
+          <MyGap jarak={20} />
+          <MyButton
+            onPress={() =>
+              Linking.openURL('https://goo.gl/maps/xmTcLZ7piRiD5Dth9')
             }
-            buttonStyle={{
-              backgroundColor: colors.secondary,
-              height: 45,
-              marginTop: '5%',
-              borderRadius: 10,
-              marginBottom: 20,
-              padding: 20,
-              margin: 5,
-            }}
+            title="Lihat Alamat Toko di Maps"
+            warna={colors.white}
+            colorText={colors.primary}
+            iconColor={colors.primary}
+            Icons="map-outline"
           />
         </View>
       </View>

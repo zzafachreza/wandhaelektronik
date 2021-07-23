@@ -12,7 +12,7 @@ import {Icon} from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import {colors} from '../../utils/colors';
-import {fonts, windowHeight} from '../../utils/fonts';
+import {fonts, windowHeight, windowWidth} from '../../utils/fonts';
 import 'intl';
 import 'intl/locale-data/jsonp/en';
 import {color} from 'react-native-elements/dist/helpers';
@@ -50,26 +50,15 @@ export default function MyTerbaik() {
           // padding: 10,
           backgroundColor: '#FFF',
         }}>
-        <View
+        <Image
+          resizeMode="stretch"
+          source={require('../../assets/list.png')}
           style={{
-            flexDirection: 'row',
-            // justifyContent: 'center',
-            padding: 10,
-            alignItems: 'center',
-            paddingVertical: 5,
-            backgroundColor: colors.primary,
-          }}>
-          <Icon type="ionicon" name="grid" color={colors.white} size={16} />
-          <Text
-            style={{
-              fontFamily: 'Montserrat-SemiBold',
-              color: colors.white,
-              left: 10,
-              fontSize: 16,
-            }}>
-            HANDPHONE
-          </Text>
-        </View>
+            width: windowWidth,
+            height: windowWidth / 1.7,
+          }}
+        />
+
         <View style={{padding: 10}}>
           <FlatList
             numColumns={2}
