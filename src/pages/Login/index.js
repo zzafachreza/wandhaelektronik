@@ -25,6 +25,7 @@ export default function Login({navigation}) {
   const [data, setData] = useState({
     email: null,
     password: null,
+    kode_akses: null,
   });
 
   useEffect(() => {
@@ -140,6 +141,19 @@ export default function Login({navigation}) {
               setData({
                 ...data,
                 password: value,
+              })
+            }
+          />
+          <MyGap jarak={20} />
+          <MyInput
+            placeholder="Hubungi admin jika belum ada"
+            label="Kode Akses"
+            iconname="apps-outline"
+            secureTextEntry
+            onChangeText={value =>
+              setData({
+                ...data,
+                kode_akses: value,
               })
             }
           />
